@@ -2,24 +2,26 @@
 //hello, human.
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class Testing
+public class Last2
 {
 
   public static void main(String[] args) throws IOException
   {
     
-    Deck deck = new Deck(20);      
-    
-    for (int need = 3; need<=3; need++)
+    Deck deck = new Deck(20); 
+    ArrayList<ArrayList<Integer>> decks = new ArrayList<ArrayList<Integer>>(125970);
+ 
+    for (int need = 1; need<=2; need++)
     {
       File file = new File("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
       		"workspace\\ColourOfMoney\\2Last\\2Last_" + need + ".txt");
       PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
       
-      double[][] data = new double[125970][14];
+      double[][] data = new double[125970][2];
       
       int counter=0;
 
@@ -38,10 +40,12 @@ public class Testing
                   for (int g=f+1; g<=19; g++)
                   {
                     for (int h=g+1; h<=20; h++)
-                    {
+                    {          
                       deck = new Deck(20);
                       deck.removeCard(a); deck.removeCard(b); deck.removeCard(c); deck.removeCard(d);
                       deck.removeCard(e); deck.removeCard(f); deck.removeCard(g); deck.removeCard(h);
+                      
+                      if (need == 1) decks.add(deck.getDeck()); //add to decks array
                       
                       //System.out.println(deck);
                       
@@ -74,10 +78,6 @@ public class Testing
                       
                       data[counter][0] = maxP;
                       data[counter][1] = cardChoice;
-                      data[counter][2] = deck.get(0); data[counter][3] = deck.get(1); data[counter][4] = deck.get(2); data[counter][5] = deck.get(3);
-                      data[counter][6] = deck.get(4); data[counter][7] = deck.get(5); data[counter][8] = deck.get(6); data[counter][9] = deck.get(7);
-                      data[counter][10] = deck.get(8); data[counter][11] = deck.get(9); data[counter][12] = deck.get(10); data[counter][13] = deck.get(11);
-
                       counter++;
                     }
                   }
@@ -102,8 +102,11 @@ public class Testing
 //      System.out.println(Arrays.toString(data[data.length - 1])); //worstcase
     }
     
-    
-
+    File file = new File("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
+        "workspace\\ColourOfMoney\\2Last\\2Last_AllDecks.txt");
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));    
+    for (ArrayList<Integer> a: decks) out.println(a);    
+    out.close();  
   }
 
 }
