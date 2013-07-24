@@ -14,7 +14,7 @@ public class Deck
       deck.add(i);
     }
   }
-  
+
   public void removeCard(int n)
   {
     deck.remove(new Integer(n));
