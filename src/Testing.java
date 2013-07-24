@@ -1,9 +1,7 @@
 //hello
+//hello, human.
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Arrays;
 
 
@@ -12,11 +10,15 @@ public class Testing
 
   public static void main(String[] args) throws IOException
   {
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("2ndLastMove.txt")));
+    
     Deck deck = new Deck(20);      
     
-    for (int need = 2; need<=2; need++)
+    for (int need = 3; need<=3; need++)
     {
+      File file = new File("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
+      		"workspace\\ColourOfMoney\\2Last\\2Last_" + need + ".txt");
+      PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+      
       double[][] data = new double[125970][14];
       
       int counter=0;
@@ -89,20 +91,19 @@ public class Testing
       out.println("Need = " + need);
       out.println("-----------------------------------------------------------------"); out.println();
       
-      double min = 2.0;
-      double[] worstcase = new double[3];
-      
       for (double[] a: data)
-      {
-        if (a[0] < min) worstcase = a;
+      {        
         out.println(Arrays.toString(a));
       }
       
-      System.out.println(Arrays.toString(worstcase));
+      out.close();    
+      
+//      System.out.println(Arrays.toString(data[0])); //bestcase
+//      System.out.println(Arrays.toString(data[data.length - 1])); //worstcase
     }
     
-    out.close();
-    System.exit(0);
+    
+
   }
 
 }
