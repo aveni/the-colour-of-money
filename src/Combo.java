@@ -12,7 +12,14 @@ public class Combo {
 	
 	public static int binom(int n, int k)
 	{
-		return factorial(n)/(factorial(k)*factorial(n-k));
+		if(n<k)
+		{
+			return 0;
+		}
+		else
+		{
+			return factorial(n)/(factorial(k)*factorial(n-k));
+		}
 	}
 	
 }
