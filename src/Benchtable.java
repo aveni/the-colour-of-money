@@ -11,7 +11,7 @@ public class Benchtable
   {
     Deck deck = new Deck(20);
     deck.removeCard(14); deck.removeCard(15); deck.removeCard(16); deck.removeCard(17);
-    deck.removeCard(8); deck.removeCard(9); deck.removeCard(2);    
+    deck.removeCard(8); deck.removeCard(9); deck.removeCard(2);
     //Deck is 1 - 13
     
     int need = 57;
@@ -75,7 +75,7 @@ public class Benchtable
 	  int result=1;
 	  for(int i=0; i<deck.getSize(); i++)
 	  {
-		  result+=Combo.binom(20-deck.get(i), 12-i);
+		  result+=Combo.binom(20-deck.get(i), deck.getSize()-i);
 	  }
 	  return result;
   }

@@ -1,8 +1,8 @@
 public class Combo {
 	
-	public static int factorial(int n)
+	public static long factorial(int n)
 	{
-		int result=1;
+		long result=1;
 		for(int i=1; i<=n; i++)
 		{
 			result*=i;
@@ -18,7 +18,7 @@ public class Combo {
 		}
 		else
 		{
-			return factorial(n)/(factorial(k)*factorial(n-k));
+			return (int)(factorial(n)/(factorial(k)*factorial(n-k)));
 		}
 	}
 	
