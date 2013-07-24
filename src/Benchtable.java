@@ -11,10 +11,10 @@ public class Benchtable
   {
     Deck deck = new Deck(20);
     deck.removeCard(14); deck.removeCard(15); deck.removeCard(16); deck.removeCard(17);
-    deck.removeCard(18); deck.removeCard(19); deck.removeCard(20);    
+    deck.removeCard(8); deck.removeCard(9); deck.removeCard(2);    
     //Deck is 1 - 13
     
-    int need = 30;
+    int need = 57;
     double maxP = 0.0;
     int cardChoice = -1;
 
@@ -31,15 +31,16 @@ public class Benchtable
         
         if (temp<=0) P+=1.0;
         
+        else if (temp> 39) P +=0.0;
+        
         else
         {
           //Now read previous file to find probability with given need and configuration
-          ArrayList<Integer> tempDeck = deck.getDeck();
+          //ArrayList<Integer> tempDeck = deck.getDeck();
           
-          int numLine = 0; //have to figure out how to find numLine....
+          int numLine = findLine(deck); //have to figure out how to find numLine....
 
-          File searchFile = new File("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
-              "workspace\\ColourOfMoney\\2Last\\2Last_" + temp + ".txt");
+          File searchFile = new File(deck.getClass().getResource(".").getPath() + "\\..\\2Last\\2Last_" + temp + ".txt");
           Scanner sc = new Scanner(searchFile);
           for (int k=0; k<numLine+3; k++) sc.nextLine();
           String prob = sc.next();
