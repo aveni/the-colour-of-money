@@ -16,9 +16,15 @@ public class Combo {
 		{
 			return 0;
 		}
+		else if(k>n/2) return binom(n, n-k);
 		else
 		{
-			return (int)(factorial(n)/(factorial(k)*factorial(n-k)));
+			long val = 1;
+			for (int i=n-k+1; i<=n; i++)
+			{
+				val*=i;
+			}
+			return (int)(val/factorial(k));
 		}
 	}
 	
