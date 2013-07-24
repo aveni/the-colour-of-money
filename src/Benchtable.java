@@ -68,5 +68,15 @@ public class Benchtable
 //    data[counter][1] = cardChoice;
 //    counter++;
   }
+  
+  public static int findLine(Deck deck)
+  {
+	  int result=1;
+	  for(int i=0; i<deck.getSize(); i++)
+	  {
+		  result+=Combo.binom(20-deck.get(i), 12-i);
+	  }
+	  return result;
+  }
 
 }
