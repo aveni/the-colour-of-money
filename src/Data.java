@@ -1,3 +1,4 @@
+import java.io.*;
 
 public class Data {
 	private double[][] array;
@@ -7,7 +8,25 @@ public class Data {
 		int maxNeed;
 		if((41-turn)*turn/2 < 80) {maxNeed = (41-turn)*turn/2;}
 		else {maxNeed = 80;}
-		double[][] array = new double[maxNeed][Combo.binom(20, 10+turn)];
+		array = new double[maxNeed][Combo.binom(20, 10+turn)];
+	}
+	
+	public Data(String path) throws Exception
+	{
+		FileInputStream fileIn = new FileInputStream(path);
+		ObjectInputStream in = new ObjectInputStream(fileIn);
+		array = (double[][]) in.readObject();
+		in.close();
+		fileIn.close();
+	}
+	
+	public void store(String path) throws Exception
+	{
+		FileOutputStream fileOut = new FileOutputStream(path);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(array);
+		out.close();
+		fileOut.close();
 	}
 
 	public void setValue(int need, Deck deck, double value)
