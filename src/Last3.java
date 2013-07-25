@@ -69,7 +69,7 @@ public class Last3
                           //Now read previous file to find probability with given need and configuration
                           //ArrayList<Integer> tempDeck = deck.getDeck();
                           
-                          int numLine = Benchtable.findLine(deck); //have to figure out how to find numLine....
+                          int numLine = 10000; //have to figure out how to find numLine....
 
                           File searchFile = new File(deck.getClass().getResource(".").getPath() + "\\..\\2Last\\2Last_" + temp + ".txt");
                           Scanner sc = new Scanner(searchFile);
