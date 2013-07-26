@@ -7,19 +7,22 @@ import java.util.Scanner;
 public class Last3
 {
 
-  public static void main(String[] args) throws IOException
+  public static void main(String[] args) throws IOException, ClassNotFoundException
   {
-
+    FileInputStream fileIn = new FileInputStream("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
+        "workspace\\ColourOfMoney\\Data\\2Last");
+    ObjectInputStream in = new ObjectInputStream(fileIn);
+    double[][] last2Data = (double[][]) in.readObject();
+    in.close();
+    fileIn.close();
+    
+    System.out.println("done importing");
     Deck deck = new Deck(20);      
-    ArrayList<ArrayList<Integer>> decks = new ArrayList<ArrayList<Integer>>(77520);
-
-    for (int need = 1; need<=1; need++)
+    double[][] data = new double[57][77520];
+    
+    for (int need = 1; need<=57; need++)
     {
-      File file = new File(deck.getClass().getResource(".").getPath() + "\\..\\3Last\\3Last_" + need + ".txt");
-      PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-
-      double[][] data = new double[77520][2];
-
+      System.out.println(need);
       int counter=0;
 
       for (int a=1; a<=14; a++)
@@ -37,18 +40,11 @@ public class Last3
                 {
                   for (int g=f+1; g<=20; g++)
                   {
-                	System.out.println(g);
                     deck = new Deck(20);
                     deck.removeCard(a); deck.removeCard(b); deck.removeCard(c); deck.removeCard(d);
                     deck.removeCard(e); deck.removeCard(f); deck.removeCard(g);
 
-                    if (need == 1) decks.add(deck.getDeck()); //add to decks array
-                    //System.out.println(deck);
-/////////////////////////////////////////////////////////////////////////////////////////
-                    
                     double maxP = 0.0;
-                    int cardChoice = -1;
-
                     
                     for (int i=0; i<13; i++) //finding best choicecard
                     {
@@ -66,20 +62,8 @@ public class Last3
                         
                         else
                         {
-                          //Now read previous file to find probability with given need and configuration
-                          //ArrayList<Integer> tempDeck = deck.getDeck();
-                          
-                          int numLine = 10000; //have to figure out how to find numLine....
-
-                          File searchFile = new File(deck.getClass().getResource(".").getPath() + "\\..\\2Last\\2Last_" + temp + ".txt");
-                          Scanner sc = new Scanner(searchFile);
-                          for (int k=0; k<numLine+3; k++) sc.nextLine();
-                          String prob = sc.next();
-                          prob = prob.substring(1, prob.length() - 1);
-                          
-                          //System.out.println("Need: " + temp + "Prob:" + prob);
-                          
-                          P += Double.parseDouble(prob);
+                          int numLine = Combo.findLine(deck);
+                          P += last2Data[temp-1][numLine];
                         }
                         
 //                        System.out.println(deck);
@@ -90,12 +74,12 @@ public class Last3
                       P/=13.0;
                       if (P>maxP)
                       {
-                        maxP = P; cardChoice = N;
+                        maxP = P;
                       }
                     }
-                   data[counter][0] = maxP;
-                   data[counter][1] = cardChoice;
-                   counter++;
+                   
+                    data[need-1][counter] = maxP;
+                    counter++;
                   }
                 }
               }
@@ -104,26 +88,15 @@ public class Last3
         }
       }
 
-      out.println("Need = " + need);
-      out.println("-----------------------------------------------------------------"); out.println();
-
-      for (double[] a: data)
-      {        
-        out.println(Arrays.toString(a));
-      }
-
-      out.close();    
-
-      //      System.out.println(Arrays.toString(data[0])); //bestcase
-      //      System.out.println(Arrays.toString(data[data.length - 1])); //worstcase
+      
     }
-
-    File file = new File(deck.getClass().getResource(".").getPath() + "\\..\\3Last\\3Last_AllDecks.txt");
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
     
-    for (ArrayList<Integer> a: decks) out.println(a);    
-    out.close(); 
-
+    FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Abhinav\\Documents\\Phillips Andover\\Lower Year\\Comp-500\\" +
+        "workspace\\ColourOfMoney\\Data\\3Last");
+    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+    out.writeObject(data);
+    out.close();
+    fileOut.close();
 
   }
 
