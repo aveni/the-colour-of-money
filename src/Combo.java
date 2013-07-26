@@ -28,4 +28,13 @@ public class Combo {
 		}
 	}
 	
+	public static int findLine(Deck deck)
+  {
+    int result=0;
+    for(int i=0; i<deck.getSize(); i++)
+    {
+      result+=Combo.binom(20-deck.get(i), deck.getSize()-i);
+    }
+    return result;
+  }
 }

@@ -38,7 +38,7 @@ public class Benchtable
           //Now read previous file to find probability with given need and configuration
           //ArrayList<Integer> tempDeck = deck.getDeck();
           
-          int numLine = findLine(deck); //have to figure out how to find numLine....
+          int numLine = Combo.findLine(deck); //have to figure out how to find numLine....
 
           File searchFile = new File(deck.getClass().getResource(".").getPath() + "\\..\\2Last\\2Last_" + temp + ".txt");
           Scanner sc = new Scanner(searchFile);
@@ -70,14 +70,6 @@ public class Benchtable
 //    counter++;
   }
   
-  public static int findLine(Deck deck)
-  {
-	  int result=1;
-	  for(int i=0; i<deck.getSize(); i++)
-	  {
-		  result+=Combo.binom(20-deck.get(i), deck.getSize()-i);
-	  }
-	  return result;
-  }
+  
 
 }
