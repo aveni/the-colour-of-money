@@ -17,10 +17,16 @@ public class TestGetData
     fileIn.close();
     
     System.out.println("done");
-    System.out.println(Arrays.toString(data[49]));
-    System.out.println(Arrays.toString(data[59]));
-    System.out.println(Arrays.toString(data[69]));
-    System.out.println(Arrays.toString(data[79]));
+
+    
+    double tot=0;
+    for (int i=49; i<=79; i++)
+    {
+      System.out.println("Need=" + (i+1) + ": " + data[i][0]);
+      tot+=data[i][0];
+    }
+    
+    System.out.println("Average: " + tot/31);
   }
 
 }
